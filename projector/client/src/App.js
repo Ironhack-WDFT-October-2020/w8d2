@@ -6,7 +6,7 @@ import ProjectDetails from './components/ProjectDetails';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 class App extends React.Component {
 
@@ -27,12 +27,20 @@ class App extends React.Component {
         <Route
           exact
           path='/projects'
-          component={Projects}
+          // component={Projects}
+          render={props => {
+            if (this.state.user) {
+              return <Projects {...props} />
+            }
+            else {
+              return <Redirect to='/' />
+            }
+          }}
         />
         <Route
           exact
           path='/projects/:id'
-          component={ProjectDetails}
+          render={props => <ProjectDetails user={this.state.user} {...props} />}
         />
         <Route
           exact
