@@ -4,6 +4,7 @@ import './App.css';
 import Projects from './components/Projects';
 import ProjectDetails from './components/ProjectDetails';
 import Signup from './components/Signup';
+import Login from './components/Login';
 import Navbar from './components/Navbar';
 import { Route } from 'react-router-dom';
 
@@ -22,7 +23,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App" >
-        <Navbar />
+        <Navbar user={this.state.user} setUser={this.setUser} />
         <Route
           exact
           path='/projects'
@@ -37,6 +38,11 @@ class App extends React.Component {
           exact
           path='/signup'
           render={props => <Signup setUser={this.setUser} {...props} />}
+        />
+        <Route
+          exact
+          path='/login'
+          render={props => <Login setUser={this.setUser} {...props} />}
         />
       </div>
     );
